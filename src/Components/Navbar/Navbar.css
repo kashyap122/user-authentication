@@ -1,0 +1,15 @@
+.navigation {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    background-color: rgb(72, 72, 202);
+}
+.navigation a{
+    text-decoration: none;
+    color: white;
+    padding: 30px;
+    font-size: large;
+}
