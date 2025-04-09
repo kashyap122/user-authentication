@@ -1,7 +1,23 @@
 
-# 🛡️ User Authentication System with JWT & Google OAuth (Node.js + React)
+# 🛡️ Full-stack reusable user authentication system
 
-This project is a full-stack user authentication system built with **React.js** (frontend), **Node.js + Express** (backend), **MongoDB** (database), and includes both **JWT-based login/register** and **Google OAuth 2.0 login**. Users can register/login via email/password or sign in using their Google account.
+## 🧪 Tech Stack & Libraries
+
+- Frontend: React.js, Vite, Axios, React Router Dom, TailwindCSS
+- Backend: Node.js, Express.js, Passport.js
+- Auth: JWT, Bcrypt, Google OAuth 2.0
+- DB: MongoDB or MongoDB Atlas (with Mongoose)
+
+---
+
+## 📌 Features
+
+- ✅ JWT Authentication
+- ✅ Google OAuth Login/Register
+- ✅ Register/Login using email & password
+- ✅ MongoDB User Storage
+- ✅ Environment-based config
+- ✅ Session-based Google auth
 
 ---
 
@@ -73,36 +89,6 @@ npm run dev
 | POST   | /api/auth/login           | Login with email/password      |
 | GET    | /api/auth/google          | Start Google OAuth login       |
 | GET    | /api/auth/google/callback| Handle Google OAuth callback   |
-
----
-
-## 🧪 Tech Stack & Libraries
-
-- Frontend: React.js, Vite, Axios, React Router Dom, TailwindCSS
-- Backend: Node.js, Express.js, Passport.js
-- Auth: JWT, Bcrypt, Google OAuth 2.0
-- DB: MongoDB (with Mongoose)
-
----
-
-## 📌 Features
-
-- ✅ JWT Authentication
-- ✅ Google OAuth Login
-- ✅ React Dashboard UI
-- ✅ MongoDB User Storage
-- ✅ Environment-based config
-- ✅ Session-based Google auth
-
----
-
-## 🚀 Future Improvements
-
-- Add Logout functionality
-- Use HTTP-only cookies for tokens
-- Refresh token implementation
-- Better error messages and validation
-- Add roles (admin/user)
 
 ---
 
