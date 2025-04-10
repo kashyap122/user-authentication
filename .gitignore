@@ -150,3 +150,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+user-authentication-project-credentials.json

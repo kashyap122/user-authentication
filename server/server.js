@@ -23,10 +23,5 @@ app.get("/", (req, res) => {
   res.json({ message: "User Authentication" });
 });
 
-// console.log("Google profile", profile);
-// console.log("Access token", accessToken);
-// console.log("Refresh token", refreshToken);
-
-//Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🟢 Server running on http://localhost:3000/`));

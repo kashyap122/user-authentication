@@ -21,6 +21,7 @@ passport.use(
           googleId: profile.id,
           firstname: profile.name.givenName,
           lastname: profile.name.familyName,
+          profilePic: profile.photos && profile.photos[0] ? profile.photos[0].value : '',
         });
 
         const savedUser = await newUser.save();
