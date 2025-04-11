@@ -5,27 +5,30 @@ const router = express.Router();
 const authController = require("../controllers/auth.controller");
 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+// router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get(
-    '/google/callback',
-    passport.authenticate('google', {
-      failureRedirect: '/',
-      session: false,
-    }),
-    (req, res) => {
-      const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
-        expiresIn: '30d',
-      });
-  
-      // send token and user data to frontend (in query, cookie, or body)
-      res.redirect(`http://localhost:5173/dashboard?token=${token}`);
+router.get('/google/callback', (req, res, next) => {
+  passport.authenticate('google', { session: false }, (err, user, info) => {
+    if (err || !user) {
+      return res.redirect('/');
     }
-  );
 
-// Sign up
+    if (!user.password) {
+      // Redirect to set-password if password is not set
+      return res.redirect(`http://localhost:5173/set-password?userId=${user._id}`);
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '30d',
+    });
+
+    res.redirect(`http://localhost:5173/auth-handler?token=${token}`);
+    
+  })(req, res, next);
+});
+
 router.post("/register", authController.register);
-
-// Sign in
 router.post("/login", authController.login);
- 
+router.post('/set-password', authController.setPassword);
+
 module.exports = router;

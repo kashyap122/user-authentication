@@ -56,7 +56,6 @@ const Register = () => {
       });
     } catch (error) {
       console.error("Registration error:", error.response?.data || error.message);
-      alert("Registration failed: " + (error.response?.data?.message || error.message));
     }
   };
 

@@ -11,7 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [authToken, setAuthToken] = useState(localStorage.getItem("authToken"));
+  const [authToken] = useState(localStorage.getItem("authToken"));
 
   useEffect(() => {
     if (authToken) {
@@ -34,14 +34,18 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3000/api/auth/login", credentials);
-      setAuthToken(response.data.token);
+      // Directly store the token in localStorage
+      localStorage.setItem("authToken", response.data.token);
       console.log("Login successful:", response.data);
+      // Optionally update any state if needed:
+      // setAuthToken(response.data.token);
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error logging in:", error.response?.data || error.message);
       alert("Login failed. Please check your credentials.");
     }
-    navigate("/dashboard")
-  };
+  }
+  
 
   return (
     <div className='bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 w-screen h-screen flex justify-center items-center'>

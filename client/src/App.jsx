@@ -8,16 +8,18 @@ import {
 import Error from "./components/Error";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import SetPassword from "./components/SetPassword"; // For Google users
 import Dashboard from "./components/Dashboard";
+import AuthHandler from "./components/AuthHandler";
 
 // Layout for public and private routes
-const AppLayout = () => {
-  return <Outlet />;
-};
+const AppLayout = () => <Outlet />;
 
+// PrivateRoute Component for auth protection
 const PrivateRoute = () => {
-  const authToken = localStorage.getItem("authToken");
-  return authToken ? <Outlet /> : <Navigate to="/" />;
+  const token = localStorage.getItem("authToken");
+  console.log("PrivateRoute → authToken:", token);
+  return token ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 const appRouter = createBrowserRouter([
@@ -26,29 +28,17 @@ const appRouter = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <Error />,
     children: [
-      {
-        path: "/",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
+      { index: true, element: <Login /> },
+      { path: "register", element: <Register /> },
+      { path: "set-password", element: <SetPassword /> },
+      { path: "auth-handler", element: <AuthHandler /> }, // new route here
       {
         element: <PrivateRoute />,
-        children: [
-          {
-            path: "/dashboard",
-            element: <Dashboard />,
-          },
-        ],
+        children: [{ path: "dashboard", element: <Dashboard /> }],
       },
     ],
   },
 ]);
-
-const App = () => {
-  return <RouterProvider router={appRouter} />;
-};
+const App = () => <RouterProvider router={appRouter} />;
 
 export default App;
